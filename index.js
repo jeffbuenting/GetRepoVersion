@@ -36,9 +36,14 @@ if (readmecontent) {
     }
 }
 
-//assume versions in the files (currentversion) is more correct than the Badge version (BadgeMessage)
-if (CurrentVersion < BadgeMessage) {
-    CurrentVersion = BadgeMessage
+if (CurrentVersion && BadgeMessage) {
+    //assume versions in the files (currentversion) is more correct than the Badge version (BadgeMessage)
+    if (CurrentVersion < BadgeMessage) {
+        CurrentVersion = BadgeMessage
+    }
+}
+Else {
+    core.setFailed('Error: missing README.md or one of the config / manifest files.');
 }
 
 core.setOutput('VersionType', VerType);

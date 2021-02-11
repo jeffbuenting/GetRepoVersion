@@ -2,9 +2,9 @@ name: 'Get Repo Version'
 description: 'Retrieves the Repo's Version'
 
 outputs:
-  file:
+  VersionType:
     description: 'File name of where the version is located.'
-  version:
+  Version:
     description: 'Repo version'
     
 runs:
