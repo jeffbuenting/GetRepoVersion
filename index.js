@@ -41,8 +41,7 @@ if (CurrentVersion && BadgeMessage) {
     if (CurrentVersion < BadgeMessage) {
         CurrentVersion = BadgeMessage
     }
-}
-Else {
+} else {
     core.setFailed('Error: missing README.md or one of the config / manifest files.');
 }
 
