@@ -3,7 +3,7 @@ const core = require('@actions/core')
 const fs = require('fs');
 
 // package.json
-const JSONPackage = require('package.json');
+const JSONPackage = require('./package.json');
 const { cachedDataVersionTag } = require('v8');
 if (JSONPackage) {
     var CurrentVersion = JSONPackage.version
