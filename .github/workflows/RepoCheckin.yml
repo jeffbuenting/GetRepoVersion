@@ -21,9 +21,9 @@ jobs:
         with:
           node-version: '12'
 
-      - run: yarn install
+      - run: npm install jest --global
 
-      - run: yarn test
+      - run: npm test ./Tests
 
       - name: UpdateBadgeonSuccess
         if: success()
