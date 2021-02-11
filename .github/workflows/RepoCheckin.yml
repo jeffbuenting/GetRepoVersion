@@ -25,6 +25,6 @@ jobs:
 
       - run: npm test ./Tests
 
-      - name: UpdateBadgeonSuccess
+      - name: GetRepoVersion
         if: success()
         uses: ./
