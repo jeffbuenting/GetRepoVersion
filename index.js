@@ -16,7 +16,8 @@ if (JSONPackage) {
 
 //Powershell Module Manifest
 console.log("github.repo")
-console.log (github.repository)
+
+console.log(github.repository)
 
 const RepoUserandName =  github.repository
 //const SplitRepoName = RepoUserandName.split('/')
