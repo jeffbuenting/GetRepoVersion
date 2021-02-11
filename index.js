@@ -2,15 +2,18 @@ const github = require('@actions/github');
 const core = require('@actions/core')
 const fs = require('fs');
 
+const VerType
+
 // package.json
 const JSONPackage = require('./package.json');
 const { cachedDataVersionTag } = require('v8');
 if (JSONPackage) {
     var CurrentVersion = JSONPackage.version
-    const VerType = 'package.json'
+    VerType = 'package.json'
 }
 
 //Powershell Module Manifest
+"github.repo"
 github.repository
 
 const RepoUserandName =  github.repository
@@ -22,7 +25,7 @@ const RepoUserandName =  github.repository
 //if (manifestcontent) {
 //    var RegexMatchGroups = manifestcontent.match("ModuleVersion = '(.*)'");
 //    var CurrentVersion = RegexMatchGroups[1]
-//    const VerType = 'modulemanifest'
+//    VerType = 'modulemanifest'
 //}
 
 // readme
