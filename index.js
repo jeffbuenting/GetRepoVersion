@@ -14,7 +14,7 @@ if (JSONPackage) {
 github.repository
 
 const RepoUserandName =  github.repository
-const SplitRepoName = RepoUserandName.split('/')
+//const SplitRepoName = RepoUserandName.split('/')
 
 const PSModuleManifest = `${SplitRepoName}.psd1`
 const manifestcontent = fs.readFileSync(PSModuleManifest, 'utf8')
