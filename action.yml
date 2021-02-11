@@ -1,5 +1,5 @@
 name: 'Get Repo Version'
-description: 'Retrieves the Repo's Version'
+description: "Retrieves the Repo's Version"
 
 outputs:
   VersionType:
