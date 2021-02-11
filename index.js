@@ -1,20 +1,45 @@
-const core = require('@actions/core');
 const github = require('@actions/github');
+const core = require('@actions/core')
+const fs = require('fs');
 
-
-
-if ( fs.access( './modulename.psd1', fs.F_OK, (err) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-  } ) ) {
-
-  const result = await fs.readFile(fileName, "utf-8");
-
+// package.json
+const JSONPackage = require('package.json');
+const { cachedDataVersionTag } = require('v8');
+if (JSONPackage) {
+    var CurrentVersion = JSONPackage.version
+    const VerType = 'package.json'
 }
 
-console.log( result )
+//Powershell Module Manifest
+const PSModuleManifest = `${(github.repository).split("\/")[1]}.psd1`
+const manifestcontent = fs.readFileSync(PSModuleManifest, 'utf8')
 
+if (manifestcontent) {
+    var RegexMatchGroups = manifestcontent.match("ModuleVersion = '(.*)'");
+    var CurrentVersion = RegexMatchGroups[1]
+    const VerType = 'modulemanifest'
+}
 
-  // core.setOutput('data', result);
+// readme
+const readmecontent = fs.readFileSync('./README.md', 'utf8')
+
+console.log(readmecontent)
+
+if (readmecontent) {
+    var RegexMatchGroups = readmecontent.match('https://img.shields.io/badge/(Version)-(.*)-(.*)');
+    const BadgeLabel = RegexMatchGroups[1]
+    const BadgeMessage = RegexMatchGroups[2]
+    const BadgeColor = RegexMatchGroups[3]
+
+    if (!VerType) {
+        const VerType = 'readme'
+    }
+}
+
+//assume versions in the files (currentversion) is more correct than the Badge version (BadgeMessage)
+if (CurrentVersion < BadgeMessage) {
+    CurrentVersion = BadgeMessage
+}
+
+core.setOutput('VersionType', VerType);
+core.setOutput('Version', CurrentVersion);

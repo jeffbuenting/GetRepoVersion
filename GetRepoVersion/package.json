@@ -1,9 +1,0 @@
-{
-  "name": "get-repo-version",
-  "version": "0.0.0",
-  "description": "GetRepoVersion",
-  "main": "app.js",
-  "author": {
-    "name": ""
-  }
-}
