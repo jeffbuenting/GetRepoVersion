@@ -19,11 +19,11 @@ const RepoUserandName =  github.repository
 //const PSModuleManifest = `${SplitRepoName}.psd1`
 //const manifestcontent = fs.readFileSync(PSModuleManifest, 'utf8')
 
-if (manifestcontent) {
-    var RegexMatchGroups = manifestcontent.match("ModuleVersion = '(.*)'");
-    var CurrentVersion = RegexMatchGroups[1]
-    const VerType = 'modulemanifest'
-}
+//if (manifestcontent) {
+//    var RegexMatchGroups = manifestcontent.match("ModuleVersion = '(.*)'");
+//    var CurrentVersion = RegexMatchGroups[1]
+//    const VerType = 'modulemanifest'
+//}
 
 // readme
 const readmecontent = fs.readFileSync('./README.md', 'utf8')
