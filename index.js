@@ -11,8 +11,9 @@ if (JSONPackage) {
 }
 
 //Powershell Module Manifest
-const RepoName = (github.repository).split("\/")[1]
-const PSModuleManifest = `${RepoName}.psd1`
+const RepoUserandName =  github.repository
+
+const PSModuleManifest = `${RepoUserandName.split('/')}.psd1`
 const manifestcontent = fs.readFileSync(PSModuleManifest, 'utf8')
 
 if (manifestcontent) {
