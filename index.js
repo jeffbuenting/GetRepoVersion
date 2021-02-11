@@ -16,8 +16,8 @@ github.repository
 const RepoUserandName =  github.repository
 //const SplitRepoName = RepoUserandName.split('/')
 
-const PSModuleManifest = `${SplitRepoName}.psd1`
-const manifestcontent = fs.readFileSync(PSModuleManifest, 'utf8')
+//const PSModuleManifest = `${SplitRepoName}.psd1`
+//const manifestcontent = fs.readFileSync(PSModuleManifest, 'utf8')
 
 if (manifestcontent) {
     var RegexMatchGroups = manifestcontent.match("ModuleVersion = '(.*)'");
