@@ -19,7 +19,9 @@ console.log("github.repo")
 
 console.log(github.context.payload)
 
-const RepoUserandName = JSON.stringify(github.context.payload, undefined, 2)
+"---"
+
+const RepoUserandName = JSON.stringify(github.context.repository, undefined, 2)
 console.log(RepoUserandName)
 //const SplitRepoName = RepoUserandName.split('/')
 
