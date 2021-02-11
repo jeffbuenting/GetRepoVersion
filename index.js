@@ -3,6 +3,7 @@ const core = require('@actions/core')
 const fs = require('fs');
 
 var VerType = ''
+var BadgeMessage = ''
 
 // package.json
 const JSONPackage = require('./package.json');
@@ -31,12 +32,10 @@ const RepoUserandName =  github.repository
 // readme
 const readmecontent = fs.readFileSync('./README.md', 'utf8')
 
-console.log(readmecontent)
-
 if (readmecontent) {
     var RegexMatchGroups = readmecontent.match('https://img.shields.io/badge/(Version)-(.*)-(.*)');
     const BadgeLabel = RegexMatchGroups[1]
-    const BadgeMessage = RegexMatchGroups[2]
+    BadgeMessage = RegexMatchGroups[2]
     const BadgeColor = RegexMatchGroups[3]
 
     if (!VerType) {
@@ -44,7 +43,7 @@ if (readmecontent) {
     }
 }
 
-if (CurrentVersion && BadgeMessage) {
+if (CurrentVersion && (BadgeMessage != '')) {
     //assume versions in the files (currentversion) is more correct than the Badge version (BadgeMessage)
     if (CurrentVersion < BadgeMessage) {
         CurrentVersion = BadgeMessage
