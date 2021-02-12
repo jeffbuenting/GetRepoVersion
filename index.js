@@ -21,7 +21,7 @@ console.log("github.repo")
 
 
 
-const RepoUserandName = process.env.github.GITHUB_REPOSITORY
+const RepoUserandName = process.env.GITHUB_REPOSITORY
 console.log(RepoUserandName)
 //const SplitRepoName = RepoUserandName.split('/')
 
