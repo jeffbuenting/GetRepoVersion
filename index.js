@@ -16,9 +16,13 @@ if (JSONPackage) {
 
 //Powershell Module Manifest
 const RepoUserandName = process.env.GITHUB_REPOSITORY
-console.log(RepoUserandName)
+console.log(RepoUserandName);
 
-const manifestcontent = fs.readFileSync(`${(process.env.GITHUB_REPOSITORY).split('/')[1]}.psd1`, 'utf8')
+try {
+    const manifestcontent = fs.readFileSync(`${(process.env.GITHUB_REPOSITORY).split('/')[1]}.psd1`, 'utf8');
+} catch (e) {
+    // ignore errors
+}
 
 if (manifestcontent) {
     var RegexMatchGroups = manifestcontent.match("ModuleVersion = '(.*)'");
