@@ -17,7 +17,7 @@ if (JSONPackage) {
 //Powershell Module Manifest
 console.log("github.repo")
 
-console.log(${{ GITHUB_REPOSITORY }})
+//console.log(${{ GITHUB_REPOSITORY }})
 
 
 
