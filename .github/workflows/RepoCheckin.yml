@@ -4,6 +4,7 @@ on:
   push:
     branches:
       '**'
+
   pull_request:
     branches:
       '**'
@@ -27,4 +28,19 @@ jobs:
 
       - name: GetRepoVersion
         if: success()
+        id: GetRepoVer
         uses: ./
+
+      - name: IncreaseVersion
+        id: IncreaseVer
+        shell: pwsh
+        run: |
+          $SplitVer = ${{ steps.GetRepoVer.outputs.version }} -split '\.'
+          $NewVer = "$($SplitVer[0]).$($SplitVer[1]).$([int]$SplitVer[2] + 1)"
+          Write-Output "::set-output name=version::$NewVer"
+
+      - name: Update version badge
+        uses: jeffbuenting/UpdateCustomBadge
+        with: 
+          vertype: steps.GetRepoVer.outputs.vertype
+          version: steps.IncreaseVer.outputs.version
