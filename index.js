@@ -60,7 +60,7 @@ if (CurrentVersion = '') {
 }
 
 console.log(`VerType = ${VerType}`)
-console.log(`Version = ${Version}`)
+console.log(`Version = ${CurrentVersion}`)
 
 core.setOutput('VersionType', VerType);
 core.setOutput('Version', CurrentVersion);
