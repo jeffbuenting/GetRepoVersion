@@ -5,6 +5,7 @@ const fs = require('fs');
 var VerType = ''
 var BadgeMessage = ''
 var CurrentVersion = ''
+var manifestcontent = null
 
 // package.json
 const JSONPackage = require('./package.json');
@@ -19,7 +20,7 @@ const RepoUserandName = process.env.GITHUB_REPOSITORY
 console.log(RepoUserandName);
 
 try {
-    const manifestcontent = fs.readFileSync(`${(process.env.GITHUB_REPOSITORY).split('/')[1]}.psd1`, 'utf8');
+    manifestcontent = fs.readFileSync(`${(process.env.GITHUB_REPOSITORY).split('/')[1]}.psd1`, 'utf8');
 } catch (e) {
     // ignore errors
 }
