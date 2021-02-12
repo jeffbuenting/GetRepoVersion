@@ -17,12 +17,12 @@ if (JSONPackage) {
 //Powershell Module Manifest
 console.log("github.repo")
 
-console.log(${ GITHUB_REPOSITORY })
+console.log(${{ GITHUB_REPOSITORY }})
 
 
 
-//const RepoUserandName = JSON.stringify(github.context.repository, undefined, 2)
-//console.log(RepoUserandName)
+const RepoUserandName = process.env.github.GITHUB_REPOSITORY
+console.log(RepoUserandName)
 //const SplitRepoName = RepoUserandName.split('/')
 
 //const PSModuleManifest = `${SplitRepoName}.psd1`
