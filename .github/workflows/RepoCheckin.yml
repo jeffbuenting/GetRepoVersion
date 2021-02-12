@@ -40,7 +40,7 @@ jobs:
           Write-Output "::set-output name=version::$NewVer"
 
       - name: Update version badge
-        uses: jeffbuenting/UpdateCustomBadge
+        uses: jeffbuenting/UpdateCustomBadge@jeffbuenting-patch-1
         with: 
           vertype: steps.GetRepoVer.outputs.vertype
           version: steps.IncreaseVer.outputs.version
