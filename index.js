@@ -13,6 +13,7 @@ const { cachedDataVersionTag } = require('v8');
 if (JSONPackage) {
     CurrentVersion = JSONPackage.version
     VerType = 'package.json'
+    console.log(CurrentVersion)
 }
 
 //Powershell Module Manifest
@@ -48,18 +49,19 @@ if (readmecontent) {
 }
 
 //assume versions in the files (currentversion) is more correct than the Badge version (BadgeMessage).  otherwise if only badge version set that to Current Version
-if (CurrentVersion = '') {
+if (CurrentVersion == '') {
     console.log('Setting Current version to Badge Version')
 
     CurrentVersion = BadgeMessage
 }
 
 //Throw error if CurrentVersion is ''.  This means version was not found in any file.
-if (CurrentVersion = '') {
+if (CurrentVersion == '') {
     core.setFailed('Error: missing README.md or one of the config / manifest files.');
 }
 
 console.log(`VerType = ${VerType}`)
+console.log(CurrentVersion)
 console.log(`Version = ${CurrentVersion}`)
 
 core.setOutput('VersionType', VerType);
