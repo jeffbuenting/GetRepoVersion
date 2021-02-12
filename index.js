@@ -11,6 +11,8 @@ var manifestcontent = null
 const JSONPackage = require('./package.json');
 const { cachedDataVersionTag } = require('v8');
 if (JSONPackage) {
+    console.log('Package.json found.  Lookeing at that version.')
+
     CurrentVersion = JSONPackage.version
     VerType = 'package.json'
     console.log(CurrentVersion)
@@ -27,9 +29,13 @@ try {
 }
 
 if (manifestcontent) {
+    console.log( 'PS Module manifest found.  Looking at its Version.')
+
     var RegexMatchGroups = manifestcontent.match("ModuleVersion = '(.*)'");
     CurrentVersion = RegexMatchGroups[1]
     VerType = 'modulemanifest'
+
+    console.log(CurrentVersion)
 }
 
 // readme
@@ -46,6 +52,8 @@ if (readmecontent) {
     if (!VerType) {
         const VerType = 'readme'
     }
+
+    console.log('BadgeMessage')
 }
 
 //assume versions in the files (currentversion) is more correct than the Badge version (BadgeMessage).  otherwise if only badge version set that to Current Version
