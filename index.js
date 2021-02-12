@@ -15,24 +15,16 @@ if (JSONPackage) {
 }
 
 //Powershell Module Manifest
-console.log("github.repo")
-
-//console.log(${{ GITHUB_REPOSITORY }})
-
-
-
 const RepoUserandName = process.env.GITHUB_REPOSITORY
 console.log(RepoUserandName)
-//const SplitRepoName = RepoUserandName.split('/')
 
-//const PSModuleManifest = `${SplitRepoName}.psd1`
-//const manifestcontent = fs.readFileSync(PSModuleManifest, 'utf8')
+const manifestcontent = fs.readFileSync(`${(process.env.GITHUB_REPOSITORY).split('/')[1]}`, 'utf8')
 
-//if (manifestcontent) {
-//    var RegexMatchGroups = manifestcontent.match("ModuleVersion = '(.*)'");
-//    CurrentVersion = RegexMatchGroups[1]
-//    VerType = 'modulemanifest'
-//}
+if (manifestcontent) {
+    var RegexMatchGroups = manifestcontent.match("ModuleVersion = '(.*)'");
+    CurrentVersion = RegexMatchGroups[1]
+    VerType = 'modulemanifest'
+}
 
 // readme
 const readmecontent = fs.readFileSync('./README.md', 'utf8')
