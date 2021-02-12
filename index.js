@@ -59,5 +59,8 @@ if (CurrentVersion = '') {
     core.setFailed('Error: missing README.md or one of the config / manifest files.');
 }
 
+console.log(`VerType = ${VerType}`)
+console.log(`Version = ${Version}`)
+
 core.setOutput('VersionType', VerType);
 core.setOutput('Version', CurrentVersion);
