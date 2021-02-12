@@ -18,7 +18,7 @@ if (JSONPackage) {
 const RepoUserandName = process.env.GITHUB_REPOSITORY
 console.log(RepoUserandName)
 
-const manifestcontent = fs.readFileSync(`${(process.env.GITHUB_REPOSITORY).split('/')[1]}`, 'utf8')
+const manifestcontent = fs.readFileSync(`${(process.env.GITHUB_REPOSITORY).split('/')[1]}.psd1`, 'utf8')
 
 if (manifestcontent) {
     var RegexMatchGroups = manifestcontent.match("ModuleVersion = '(.*)'");
