@@ -7,9 +7,11 @@ var BadgeMessage = ''
 var CurrentVersion = ''
 var manifestcontent = null
 
+fs.readdir('.');
+
 // package.json
 const JSONPackage = require('./package.json');
-console.log(JSONPackage);
+
 
 if (JSONPackage) {
     console.log('Package.json found.  Lookeing at that version.')
