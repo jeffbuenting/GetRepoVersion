@@ -9,7 +9,8 @@ var manifestcontent = null
 
 // package.json
 const JSONPackage = require('./package.json');
-const { cachedDataVersionTag } = require('v8');
+console.log(JSONPackage);
+
 if (JSONPackage) {
     console.log('Package.json found.  Lookeing at that version.')
 
