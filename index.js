@@ -11,7 +11,8 @@ files = fs.readdirSync('.');
 console.log(files)
 
 // package.json
-const JSONPackage = json.parse(fs.readFileSync('./package.json'));
+const JSONPackage = JSON.parse(fs.readFileSync('./package.json'));
+console.log(JSONPackage)
 
 
 if (JSONPackage) {
