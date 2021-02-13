@@ -7,7 +7,7 @@ var BadgeMessage = ''
 var CurrentVersion = ''
 var manifestcontent = null
 
-fs.readdir('.');
+fs.readdirSync('.');
 
 // package.json
 const JSONPackage = require('./package.json');
