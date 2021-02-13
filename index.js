@@ -7,12 +7,13 @@ var BadgeMessage = ''
 var CurrentVersion = ''
 var manifestcontent = null
 
-files = fs.readdirSync('.');
-console.log(files)
-
 // package.json
-const JSONPackage = JSON.parse(fs.readFileSync('./package.json'));
-console.log(JSONPackage)
+try {
+    const JSONPackage = JSON.parse(fs.readFileSync('./package.json'));
+} catch (e) {
+    // ignore error if file does not exist
+}
+
 
 
 if (JSONPackage) {
