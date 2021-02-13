@@ -6,10 +6,11 @@ var VerType = ''
 var BadgeMessage = ''
 var CurrentVersion = ''
 var manifestcontent = null
+var JSONPackage = null
 
 // package.json
 try {
-    const JSONPackage = JSON.parse(fs.readFileSync('./package.json'));
+    JSONPackage = JSON.parse(fs.readFileSync('./package.json'));
 } catch (e) {
     // ignore error if file does not exist
 }
