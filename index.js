@@ -2,7 +2,7 @@ const github = require('@actions/github');
 const core = require('@actions/core')
 const fs = require('fs');
 
-var VerType = ''
+var VerType = null
 var BadgeMessage = ''
 var CurrentVersion = ''
 var manifestcontent = null
@@ -57,7 +57,7 @@ if (readmecontent) {
     const BadgeColor = RegexMatchGroups[3]
 
     if (!VerType) {
-        const VerType = 'readme'
+        VerType = 'readme'
     }
 
     console.log('BadgeMessage')
@@ -76,7 +76,6 @@ if (CurrentVersion == '') {
 }
 
 console.log(`VerType = ${VerType}`)
-console.log(CurrentVersion)
 console.log(`Version = ${CurrentVersion}`)
 
 core.setOutput('VersionType', VerType);
