@@ -14,7 +14,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  unittest:
+    name: runs unit tests adn updates the version if successfull
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -76,7 +77,7 @@ jobs:
 
   FailedPRPesterTest:
     name: Close PR after failed tests
-    needs: pester-test
+    needs: unittest
     if: failure() && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
