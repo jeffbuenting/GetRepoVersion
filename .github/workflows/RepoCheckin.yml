@@ -3,12 +3,14 @@ name: RepoCheckin
 on:
   push:
     branches:
-      '**'
-
+      - '**'
+      - '!dev'
+      - '!main'
+      
   pull_request:
     branches:
-      '**'
-      
+      - '**'
+
   workflow_dispatch:
 
 jobs:
@@ -33,14 +35,57 @@ jobs:
 
       - name: IncreaseVersion
         id: IncreaseVer
-        shell: pwsh
+        shell: bash
         run: |
-          $SplitVer = ${{ steps.GetRepoVer.outputs.version }} -split '\.'
-          $NewVer = "$($SplitVer[0]).$($SplitVer[1]).$([int]$SplitVer[2] + 1)"
-          Write-Output "::set-output name=version::$NewVer"
-
-      - name: Update version badge
-        uses: jeffbuenting/UpdateCustomBadge@jeffbuenting-patch-1
+            CurVer=${{ steps.GetRepoVer.outputs.version }}
+            IFS='.'
+            read -a SplitVer <<<"$CurVer"
+            Major=$((SplitVer[0]))
+            Minor=$((SplitVer[1]))
+            Build="$((SplitVer[2] + 1))"
+            NewVer="$Major.$Minor.$Build"
+            unset IFS
+            echo "::set-output name=version::$NewVer"
+         
+      - name: Show Version
+        run: |
+          echo "NewVer = ${{ steps.IncreaseVer.outputs.version }}"
+  
+      - name: UpdateModuleVersion
+        uses: jeffbuenting/UpdateModuleVersion@v1.1.33
         with: 
-          vertype: steps.GetRepoVer.outputs.vertype
-          version: steps.IncreaseVer.outputs.version
+          vertype: ${{ steps.GetRepoVer.outputs.versiontype }}
+          newver: ${{ steps.IncreaseVer.outputs.version }}
+           
+      - name: UpdateReadmeVersionBadge
+        uses: jeffbuenting/UpdateCustomBadge@jeffbuenting-patch-1
+        with:
+          filename: 'README.md'
+          label: 'Version'
+          message: ${{ steps.IncreaseVer.outputs.version }}
+          
+      - name: Commit
+        if: ${{ success() }}
+        run: |
+          git status
+          git config --global user.name 'github actions'      
+          git config --global user.email 'actions@github.com'
+          git ls-files --others --exclude-standard
+          git commit -am "skip ci - Commit Updated Version Files in Repo to: ${{steps.IncreaseVer.outputs.version}}"
+          git push
+
+  FailedPRPesterTest:
+    name: Close PR after failed tests
+    needs: pester-test
+    if: failure() && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: PR info
+        run: echo "PR number = ${{ github.event.number }}"
+    
+      - name: Close Pull
+        uses: peter-evans/close-pull@v1
+        with:
+          pull-request-number: github.event.number
+          comment: Tests failed. Auto-closing pull request
+          delete-branch: false
