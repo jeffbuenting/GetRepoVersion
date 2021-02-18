@@ -1,0 +1,12 @@
+name: 'Get Repo Version'
+description: "Retrieves the Repo's Version"
+
+outputs:
+  VersionType:
+    description: 'File name of where the version is located.'
+  Version:
+    description: 'Repo version'
+    
+runs:
+  using: 'node12'
+  main: 'index.js'
