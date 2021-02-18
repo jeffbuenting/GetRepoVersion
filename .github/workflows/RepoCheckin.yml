@@ -16,6 +16,8 @@ on:
 jobs:
   unittest:
     name: runs unit tests adn updates the version if successfull
+    # ----- skip job if 'skip ci' in commit and if it is the main branch
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,6 +30,15 @@ jobs:
       - run: npm install jest --global
 
       - run: npm test ./Tests
+
+  UpdateModuleVersion:
+    name: Updates version and returns it
+    needs: unittest
+    if: success() && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2       
 
       - name: GetRepoVersion
         if: success()
@@ -51,12 +62,6 @@ jobs:
       - name: Show Version
         run: |
           echo "NewVer = ${{ steps.IncreaseVer.outputs.version }}"
-  
-      - name: UpdateModuleVersion
-        uses: jeffbuenting/UpdateModuleVersion@v1.1.33
-        with: 
-          vertype: ${{ steps.GetRepoVer.outputs.versiontype }}
-          newver: ${{ steps.IncreaseVer.outputs.version }}
            
       - name: UpdateReadmeVersionBadge
         uses: jeffbuenting/UpdateCustomBadge@jeffbuenting-patch-1
