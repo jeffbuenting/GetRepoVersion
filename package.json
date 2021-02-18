@@ -1,6 +1,6 @@
 {
   "name": "GetRepoVersion",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Github Action to retrieve the repos version",
   "main": "index.js",
   "scripts": {
